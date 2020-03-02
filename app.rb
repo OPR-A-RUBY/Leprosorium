@@ -98,6 +98,22 @@ post '/details/:post_id' do
    	# теперь контент из формы (/view/details.erb) будет присвоен переменной content  
    	content = params[:content_]	
 
-   	erb "You type comment #{content} = #{post_id}"
+   	# Запись контента в базу данных 
+   	@db.execute 'INSERT INTO Comments 
+	   		(
+	   			content, 
+	   			created_date, 
+	   			post_id
+	   		) 
+   		VALUES 
+	   		(
+	   			?, 
+	   			datetime(), 
+	   			?
+	   		)', 
+	   	[content, post_id]
+
+   	# перенаправление на страницу поста
+   	redirect to('/details/' + post_id)
 end
 
