@@ -78,3 +78,17 @@ get '/details/:post_id' do
 	erb :details
 
 end
+
+# Обработчик post-запроса /details/...
+# Бараузер отправляет параметры на сервер, а мы здесь принимаем их и обработываем
+post '/details/:post_id' do
+
+	# Получаем переменную из url
+	post_id = params[:post_id]
+
+   	# теперь контент из формы (/view/details.erb) будет присвоен переменной content  
+   	content = params[:content_]	
+
+   	erb "You type comment #{content} = #{post_id}"
+end
+
