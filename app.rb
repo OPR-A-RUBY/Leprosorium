@@ -65,11 +65,14 @@ end
 # Вывод информации о посте
 get '/details/:post_id' do
 
+	# Получаем переменную из url
 	post_id = params[:post_id]
 
 	# получить results - массив всех записей как хеши из таблицы Posts (db) у которых ... 
 	results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
 	# ... id равен post_id (это будет одна запись. Её индекс в массиве будет всегда 0 )
+
+	# получаем массива ХЕШ выбранной записи (глобальный, для использования в details.erb)
 	@row = results[0]
 
 	erb :details

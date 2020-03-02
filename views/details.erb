@@ -1,4 +1,4 @@
-<h3>Details post:</h3>
+<h3>Post details:</h3>
 
 <p>
 	<br />
@@ -9,3 +9,12 @@
 	<br />
 </p>
 	<hr />
+<h3>Coments:</h3>
+
+<p>
+<form action="/details/<%= @row['id'] %>" method="POST" >
+	<textarea name="content_" class="form-control" rows="6" placeholder="Type comment text here" ></textarea>
+	<br />
+   	<button type="submit" class="btn btn-primary"><b>Add comment</b></button>
+</form>
+</p>
