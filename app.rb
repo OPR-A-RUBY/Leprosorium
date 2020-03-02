@@ -67,6 +67,11 @@ get '/details/:post_id' do
 
 	post_id = params[:post_id]
 
-	erb "Information id = #{post_id}"
+	# получить results - массив всех записей как хеши из таблицы Posts (db) у которых ... 
+	results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
+	# ... id равен post_id (это будет одна запись. Её индекс в массиве будет всегда 0 )
+	@row = results[0]
+
+	erb :details
 
 end
