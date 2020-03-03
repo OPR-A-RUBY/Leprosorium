@@ -9,9 +9,10 @@
 	<br />
 </p>
 	<hr />
+
 <h3>Coments:</h3>
 
- 
+<p> 
 <% @comments.each do |comment_item| %>
 	<p>
 	<%= comment_item['content'] %>
@@ -20,6 +21,7 @@
 	<hr />
 	</p>
 <% end %>
+</p>
 
 <p>
 <form action="/details/<%= @row['id'] %>" method="POST" >

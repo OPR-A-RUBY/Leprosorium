@@ -59,7 +59,7 @@ post '/new' do
 
    	# Валидация контента (на пустое значение)
    	if content.length <= 0
-   		@error = 'Type post text'  # Сообщение об ошибке
+   		@error = 'Type post text'  # Сообщение об ошибке при вводе поста
    		return erb :new
    	end
 
@@ -101,8 +101,17 @@ post '/details/:post_id' do
 	# Получаем переменную из url
 	post_id = params[:post_id]
 
-   	# теперь контент из формы (/view/details.erb) будет присвоен переменной content  
+	# теперь контент из формы (/view/details.erb) будет присвоен переменной content  
    	content = params[:content_]	
+
+   	# Валидация контента (на пустое значение)
+   	if content.length <= 0
+   		@error = 'Type comment text'  # Сообщение об ошибке при вводе комментария
+   		results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
+   		@row = results[0]
+   		@comments = @db.execute 'SELECT * FROM Comments WHERE post_id = ? ORDER BY id', [post_id]
+   		return erb :details
+   	end
 
    	# Запись контента в базу данных 
    	@db.execute 'INSERT INTO Comments 
@@ -121,5 +130,6 @@ post '/details/:post_id' do
 
    	# перенаправление на страницу поста
    	redirect to('/details/' + post_id)
+   
 end
 
