@@ -84,7 +84,13 @@ get '/details/:post_id' do
 	# получаем массива ХЕШ выбранной записи (глобальный, для использования в details.erb)
 	@row = results[0]
 
-	erb :details
+	# Вывод всех коментариев к данному посту
+	# Выбрать все коментарии (ХЕШИ) у которых post_id = нашему посту. Сортировать по id.
+	@comments = @db.execute 'SELECT * FROM Comments WHERE post_id = ? ORDER BY id', [post_id]
+	# Полученная глобальная переменная - есть массив хешей. 
+	# Будем его использовать в представлении details.erb
+
+ 	erb :details
 
 end
 
