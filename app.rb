@@ -54,17 +54,27 @@ end
 
 post '/new' do
    	
-   	# теперь сонтент из формы (/view/new.erb) будет присвоен переменной content в этом методе 
-   	content = params[:content_]
+   	# теперь имя автора из (/view/new.erb) будет присвоен переменной autor в этом методе
+   	@autor = params[:autor_]
 
-   	# Валидация контента (на пустое значение)
-   	if content.length <= 0
-   		@error = 'Type post text'  # Сообщение об ошибке при вводе поста
+   	# Валидация имени автора (на пустое значение)
+   	if @autor.length <= 0
+   		@error = 'Type Your name'  # Сообщение об ошибке при вводе поста
    		return erb :new
    	end
 
+   	# теперь контент из формы (/view/new.erb) будет присвоен переменной content в этом методе 
+   	@content = params[:content_]
+
+   	# Валидация контента (на пустое значение)
+   	if @content.length <= 0
+   		@error = 'Type post text'  # Сообщение об ошибке при вводе поста
+   		return erb :new
+   	end
+   	
+   	
    	# Запись контента в базу данных 
-   	@db.execute 'INSERT INTO Posts (content, created_date) VALUES (?, datetime())', [content]
+   	@db.execute 'INSERT INTO Posts (content, created_date) VALUES (?, datetime())', [@content]
    	
    	# перенаправление на главную страницу
    	redirect to '/'
@@ -106,11 +116,7 @@ post '/details/:post_id' do
 
    	# Валидация контента (на пустое значение)
    	if content.length <= 0
-<<<<<<< HEAD
    		@error = 'Type comment text'  # Сообщение об ошибке при вводе комментария
-=======
-   		@error = 'Type comment text'  # Сообщение об ошибке при вводе сомментария
->>>>>>> e0ff085b5f9257c2a3111d58afaca8bf58e9efe3
    		results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
    		@row = results[0]
    		@comments = @db.execute 'SELECT * FROM Comments WHERE post_id = ? ORDER BY id', [post_id]

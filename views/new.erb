@@ -2,8 +2,17 @@
 <h2>Add New Post</h2>
 <p>
 <form action="/new" method="POST" >
-	<textarea name="content_" class="form-control" rows="6" placeholder="Type post text here" ></textarea>
-	<br />
+
+	<div class="form-group">
+    	<label for="exampleInputName2">Your Name:</label>
+    	<input name="autor_" type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" value=" <%= @autor %> ">
+  	</div>
+		
+	<textarea name="content_" class="form-control" rows="6" placeholder="Type post text here" value=" <%= @content %> "></textarea>
+	
+	<br /> 	
+
    	<button type="submit" class="btn btn-primary"><b>Submit</b></button>
+
 </form>
 </p>
