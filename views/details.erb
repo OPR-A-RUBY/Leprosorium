@@ -1,28 +1,22 @@
-<h3>Post details:</h3>
+<h3>Post and Details:</h3>
 
 <p>
-	<br />
 	<%= @row['content'] %>
 	<br />
-	<br />
 	<b>Post addet at <%= @row['created_date'] %></b> 
-	<br />
-</p>
 	<hr />
+	<br />
+
+	<% @comments.each do |comment_item| %>
+		<%= comment_item['content'] %>
+		<br />
+		<b> Comment addet at <%= comment_item['created_date'] %></b>
+		<hr />
+		<br />
+	<% end %>
+</p>
 
 <h3>Coments:</h3>
-
-<p> 
-<% @comments.each do |comment_item| %>
-	<p>
-	<%= comment_item['content'] %>
-	<br />
-	<b> Comment addet at <%= comment_item['created_date'] %></b>
-	<hr />
-	</p>
-<% end %>
-</p>
-
 <p>
 <form action="/details/<%= @row['id'] %>" method="POST" >
 	<textarea name="content_" class="form-control" rows="6" placeholder="Type comment text here" ></textarea>

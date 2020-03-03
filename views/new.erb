@@ -1,18 +1,19 @@
 <!-- Это форма new.erb -->
 <h2>Add New Post</h2>
 <p>
-<form action="/new" method="POST" >
+	<img src="/image.jpg" alt="" class="img-thumbnail">
 
-	<div class="form-group">
-    	<label for="exampleInputName2">Your Name:</label>
-    	<input name="autor_" type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" value=" <%= @autor %> ">
-  	</div>
+	<form action="/new" method="POST" >
+
+		<div class="form-group">
+	    	<label for="exampleInputName2">Your Name:</label>
+	    	<input name="autor_" type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" value=" <%= @autor %> ">
+	  	</div>
+			
+		<textarea name="content_" class="form-control" rows="6" placeholder="Type post text here" value=" <%= @content %> "></textarea>
 		
-	<textarea name="content_" class="form-control" rows="6" placeholder="Type post text here" value=" <%= @content %> "></textarea>
-	
-	<br /> 	
+		<br /> 	
+	   	<button type="submit" class="btn btn-primary"><b>Submit</b></button>
 
-   	<button type="submit" class="btn btn-primary"><b>Submit</b></button>
-
-</form>
+	</form>
 </p>

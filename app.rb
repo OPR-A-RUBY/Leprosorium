@@ -24,7 +24,8 @@ configure do
 	(
 	    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
 	    "created_date" DATE,
-	    "content" TEXT
+	    "content" TEXT,
+	    "autor" TEXT
 	)'
 
 	# в базе данных db создать таблицу Comments, если такая не существует
@@ -74,7 +75,19 @@ post '/new' do
    	
    	
    	# Запись контента в базу данных 
-   	@db.execute 'INSERT INTO Posts (content, created_date) VALUES (?, datetime())', [@content]
+   	@db.execute 'INSERT INTO Posts 
+   		(
+	   		content, 
+	   		created_date,
+	   		autor 
+   		) 
+   		VALUES 
+   		(
+	   		?, 
+	   		datetime(),
+	   		?
+   		)', 
+   		[@content, @autor]
    	
    	# перенаправление на главную страницу
    	redirect to '/'
