@@ -5,11 +5,21 @@
 	<%= @row['content'] %>
 	<br />
 	<br />
-	<b>Addet at <%= @row['created_date'] %></b> 
+	<b>Post addet at <%= @row['created_date'] %></b> 
 	<br />
 </p>
 	<hr />
 <h3>Coments:</h3>
+
+ 
+<% @comments.each do |comment_item| %>
+	<p>
+	<%= comment_item['content'] %>
+	<br />
+	<b> Comment addet at <%= comment_item['created_date'] %></b>
+	<hr />
+	</p>
+<% end %>
 
 <p>
 <form action="/details/<%= @row['id'] %>" method="POST" >
